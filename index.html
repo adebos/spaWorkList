@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- META -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="img/fav/favicon.ico" type="image/x-icon">
+
+    <!-- CONFIG -->
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+
+	<title>SPA WorkersList</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+
+</head>
+<body>
+
+	<div class="app" ng-app="workersApp">
+
+		<section class="wrapper">
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+
+						<user-list class="row">
+							<div class="col-md-12">
+								<p class="lead text-center title">Список сотрудников</p>
+							</div>
+							<form ng-submit="listController.add()" class="col-md-12 text-center">
+								<input ng-model="listController.worker.name" type="text" required placeholder="ФИО" autofocus="">
+								<input ng-model="listController.worker.position" type="text" required placeholder="Должность">
+								<input ng-model="listController.worker.department" type="text" required placeholder="Отдел">
+								<input ng-model="listController.worker.phoneNumber" type="tel" required minlength="7" maxlength="13" pattern="[+0-9]+" placeholder="Телефон">
+								<input ng-model="listController.worker.email" type="email" required placeholder="Почта" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+								<button class="btn btn-primary">Добавить сотрудника</button>
+							</form>
+							<div class="col-md-12">
+								<div class="table-responsive">
+									<table class="table table-striped table-bordered table-hover table-condensed">
+										<thead>
+											<tr class="info">
+												<th>№</th>
+												<th ng-click="sort('name')">ФИО
+													<i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('name'),
+													'glyphicon-chevron-down' : isSortDown('name')}"></i>
+												</th>
+												<th ng-click="sort('position')">Должность
+													<i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('position'),
+													'glyphicon-chevron-down' : isSortDown('position')}"></i>
+												</th>
+												<th ng-click="sort('department')">Отдел
+													<i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('department'),
+													'glyphicon-chevron-down' : isSortDown('department')}"></i>
+												</th>
+												<th ng-click="sort('phoneNumber')">Телефон
+													<i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('phoneNumber'),
+													'glyphicon-chevron-down' : isSortDown('phoneNumber')}"></i>
+												</th>
+												<th ng-click="sort('email')">Почта
+													<i class="glyphicon" ng-class="{'glyphicon-chevron-up' : isSortUp('email'),
+													'glyphicon-chevron-down' : isSortDown('email')}"></i>
+												</th>
+												<th colspan="2">Ред/Удал</th>
+											</tr>
+										</thead>
+										<tbody id="table"></tbody>
+									</table>
+								</div>
+								<button ng-click="listController.refresh()" class="btn btn-info">Обновить таблицу</button>
+							</div>
+						</user-list>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</body>
+</html>
